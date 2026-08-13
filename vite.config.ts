@@ -5,7 +5,8 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/German-flashcards/', // 👈 Added this line to fix the 404 asset errors
+    // ❌ REMOVE: base: '/German-flashcards/', 
+    base: '/', // 👈 ADD THIS (or leave it out) so assets load relative to Vercel's root domain
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
