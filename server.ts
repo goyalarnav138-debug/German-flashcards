@@ -9,7 +9,7 @@ import { getOrCreateUser, getUserStats, updateUserStats, getAllStudents } from "
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -228,24 +228,33 @@ Keep explanations clear, engaging, formatted with Markdown, and include small Ge
   }
 });
 
+// Setup server routing logic
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
+    // Local development: Let Vite mount its middleware
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
+    
+    app.listen(PORT, () => {
+      console.log(`Local development server running at http://localhost:${PORT}`);
+    });
   } else {
+    // Vercel / Production deployment: Serve static build directory assets
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
+    
+    // Catch-all route to hand SPA routing back to Vite's index.html
     app.get("*", (req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
     });
   }
-
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://0.0.0.0:${PORT}`);
-  });
 }
 
+// Fire server script initialization
 startServer();
+
+// Export the framework instance for Vercel Serverless Function handler routing
+export default app;
