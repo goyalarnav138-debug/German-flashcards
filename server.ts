@@ -102,7 +102,7 @@ Provide a high school student-friendly explanation, 3 natural German example sen
 Return the result strictly in JSON matching the requested schema.`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -154,7 +154,7 @@ Generate ${count} questions testing German prepositions and cases.
 Each question should have a sentence with '___' where the preposition belongs, specify the verb being tested, the correct preposition, the correct case, and 4 multiple-choice options.`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         responseMimeType: "application/json",
@@ -202,7 +202,7 @@ app.post("/api/gemini/tutor", async (req, res) => {
 
     const ai = getAIClient();
     const chat = ai.chats.create({
-      model: "gemini-3.6-flash",
+      model: "gemini-2.5-flash",
       config: {
         systemInstruction: `You are 'Herr Weber', an encouraging, friendly, and expert German language teacher for high school students in Class 9th and 10th.
 Help students master German verbs with fixed prepositions (Verben mit Präpositionen), Dativ vs. Akkusativ cases, sentence structure, and vocabulary.
