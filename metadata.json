@@ -1,0 +1,8 @@
+{
+  "name": "Remix German Verb Master - Class 9th \u0026 10th Trainer",
+  "description": "Interactive German flashcard trainer, tests, AI grammar assistant, and teacher dashboard for Class 9th (54 verbs) and Class 10th/B1 (95 verbs).",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
